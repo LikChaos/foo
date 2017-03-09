@@ -1,0 +1,988 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ShopDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="barcode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="info" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="price" Type="money" Nullable="false" />
+          <Property Name="count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Item_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Item" Type="int" Nullable="false" />
+          <Property Name="Id_ItemType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Provider_Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_item" Type="int" Nullable="false" />
+          <Property Name="Id_provider" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Quest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="key" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="LastEdit" Type="datetime" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Quest_Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_quest" Type="int" Nullable="false" />
+          <Property Name="Id_item" Type="int" Nullable="false" />
+          <Property Name="count" Type="int" Nullable="false" />
+          <Property Name="countIn" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShopQuest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Id_Provider" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShopQuest_item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Item" Type="int" Nullable="false" />
+          <Property Name="Id_ShopQuest" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supply">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Id_Provider" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supply_Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_supply" Type="int" Nullable="false" />
+          <Property Name="Id_Item" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Info" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_User" Type="int" Nullable="false" />
+          <Property Name="Id_Role" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WriteOff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Id_Item" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Item_Type_To_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Item_Type" Type="Self.Item_Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item_Type">
+              <PropertyRef Name="Id_Item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Type_To_ItemType">
+          <End Role="ItemType" Type="Self.ItemType" Multiplicity="1" />
+          <End Role="Item_Type" Type="Self.Item_Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item_Type">
+              <PropertyRef Name="Id_ItemType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provider_Item_To_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Provider_Item" Type="Self.Provider_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Provider_Item">
+              <PropertyRef Name="Id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provider_Item_To_Provider">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+          <End Role="Provider_Item" Type="Self.Provider_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Provider_Item">
+              <PropertyRef Name="Id_provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quest_Item_To_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Quest_Item" Type="Self.Quest_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quest_Item">
+              <PropertyRef Name="Id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quest_Item_To_Quest">
+          <End Role="Quest" Type="Self.Quest" Multiplicity="1" />
+          <End Role="Quest_Item" Type="Self.Quest_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quest_Item">
+              <PropertyRef Name="Id_quest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopQuest_item_To_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="ShopQuest_item" Type="Self.ShopQuest_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShopQuest_item">
+              <PropertyRef Name="Id_Item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopQuest_item_To_ShopQuest">
+          <End Role="ShopQuest" Type="Self.ShopQuest" Multiplicity="1" />
+          <End Role="ShopQuest_item" Type="Self.ShopQuest_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopQuest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShopQuest_item">
+              <PropertyRef Name="Id_ShopQuest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopQuest_To_Provider">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+          <End Role="ShopQuest" Type="Self.ShopQuest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShopQuest">
+              <PropertyRef Name="Id_Provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_Item_To_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Supply_Item" Type="Self.Supply_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supply_Item">
+              <PropertyRef Name="Id_Item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_Item_To_Supply">
+          <End Role="Supply" Type="Self.Supply" Multiplicity="1" />
+          <End Role="Supply_Item" Type="Self.Supply_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supply">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supply_Item">
+              <PropertyRef Name="Id_supply" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_To_Provider">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+          <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supply">
+              <PropertyRef Name="Id_Provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_To_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User_Role" Type="Self.User_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Role">
+              <PropertyRef Name="Id_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Role" Type="Self.User_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Role">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WriteOff_To_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="WriteOff" Type="Self.WriteOff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WriteOff">
+              <PropertyRef Name="Id_Item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ShopDBModelContainer">
+          <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item_Type" EntityType="Self.Item_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemType" EntityType="Self.ItemType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provider_Item" EntityType="Self.Provider_Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quest" EntityType="Self.Quest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quest_Item" EntityType="Self.Quest_Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShopQuest" EntityType="Self.ShopQuest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShopQuest_item" EntityType="Self.ShopQuest_item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supply" EntityType="Self.Supply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supply_Item" EntityType="Self.Supply_Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Role" EntityType="Self.User_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WriteOff" EntityType="Self.WriteOff" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Item_Type_To_Item" Association="Self.FK_Item_Type_To_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Item_Type" EntitySet="Item_Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Type_To_ItemType" Association="Self.FK_Item_Type_To_ItemType">
+            <End Role="ItemType" EntitySet="ItemType" />
+            <End Role="Item_Type" EntitySet="Item_Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provider_Item_To_Item" Association="Self.FK_Provider_Item_To_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Provider_Item" EntitySet="Provider_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provider_Item_To_Provider" Association="Self.FK_Provider_Item_To_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Provider_Item" EntitySet="Provider_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quest_Item_To_Item" Association="Self.FK_Quest_Item_To_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Quest_Item" EntitySet="Quest_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quest_Item_To_Quest" Association="Self.FK_Quest_Item_To_Quest">
+            <End Role="Quest" EntitySet="Quest" />
+            <End Role="Quest_Item" EntitySet="Quest_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopQuest_item_To_Item" Association="Self.FK_ShopQuest_item_To_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ShopQuest_item" EntitySet="ShopQuest_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopQuest_item_To_ShopQuest" Association="Self.FK_ShopQuest_item_To_ShopQuest">
+            <End Role="ShopQuest" EntitySet="ShopQuest" />
+            <End Role="ShopQuest_item" EntitySet="ShopQuest_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopQuest_To_Provider" Association="Self.FK_ShopQuest_To_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="ShopQuest" EntitySet="ShopQuest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_Item_To_Item" Association="Self.FK_Supply_Item_To_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Supply_Item" EntitySet="Supply_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_Item_To_Supply" Association="Self.FK_Supply_Item_To_Supply">
+            <End Role="Supply" EntitySet="Supply" />
+            <End Role="Supply_Item" EntitySet="Supply_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_To_Provider" Association="Self.FK_Supply_To_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Supply" EntitySet="Supply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_To_Role" Association="Self.FK_User_Role_To_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User_Role" EntitySet="User_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_To_User" Association="Self.FK_User_Role_To_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Role" EntitySet="User_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WriteOff_To_Item" Association="Self.FK_WriteOff_To_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="WriteOff" EntitySet="WriteOff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ShopDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="barcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item_Type" Relationship="Self.FK_Item_Type_To_Item" FromRole="Item" ToRole="Item_Type" />
+          <NavigationProperty Name="Provider_Item" Relationship="Self.FK_Provider_Item_To_Item" FromRole="Item" ToRole="Provider_Item" />
+          <NavigationProperty Name="Quest_Item" Relationship="Self.FK_Quest_Item_To_Item" FromRole="Item" ToRole="Quest_Item" />
+          <NavigationProperty Name="ShopQuest_item" Relationship="Self.FK_ShopQuest_item_To_Item" FromRole="Item" ToRole="ShopQuest_item" />
+          <NavigationProperty Name="Supply_Item" Relationship="Self.FK_Supply_Item_To_Item" FromRole="Item" ToRole="Supply_Item" />
+          <NavigationProperty Name="WriteOff" Relationship="Self.FK_WriteOff_To_Item" FromRole="Item" ToRole="WriteOff" />
+        </EntityType>
+        <EntityType Name="Item_Type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Item" Type="Int32" Nullable="false" />
+          <Property Name="Id_ItemType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Item_Type_To_Item" FromRole="Item_Type" ToRole="Item" />
+          <NavigationProperty Name="ItemType" Relationship="Self.FK_Item_Type_To_ItemType" FromRole="Item_Type" ToRole="ItemType" />
+        </EntityType>
+        <EntityType Name="ItemType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Item_Type" Relationship="Self.FK_Item_Type_To_ItemType" FromRole="ItemType" ToRole="Item_Type" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Provider_Item" Relationship="Self.FK_Provider_Item_To_Provider" FromRole="Provider" ToRole="Provider_Item" />
+          <NavigationProperty Name="ShopQuest" Relationship="Self.FK_ShopQuest_To_Provider" FromRole="Provider" ToRole="ShopQuest" />
+          <NavigationProperty Name="Supply" Relationship="Self.FK_Supply_To_Provider" FromRole="Provider" ToRole="Supply" />
+        </EntityType>
+        <EntityType Name="Provider_Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_item" Type="Int32" Nullable="false" />
+          <Property Name="Id_provider" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Provider_Item_To_Item" FromRole="Provider_Item" ToRole="Item" />
+          <NavigationProperty Name="Provider" Relationship="Self.FK_Provider_Item_To_Provider" FromRole="Provider_Item" ToRole="Provider" />
+        </EntityType>
+        <EntityType Name="Quest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="key" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastEdit" Type="DateTime" Precision="3" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Quest_Item" Relationship="Self.FK_Quest_Item_To_Quest" FromRole="Quest" ToRole="Quest_Item" />
+        </EntityType>
+        <EntityType Name="Quest_Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_quest" Type="Int32" Nullable="false" />
+          <Property Name="Id_item" Type="Int32" Nullable="false" />
+          <Property Name="count" Type="Int32" Nullable="false" />
+          <Property Name="countIn" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Quest_Item_To_Item" FromRole="Quest_Item" ToRole="Item" />
+          <NavigationProperty Name="Quest" Relationship="Self.FK_Quest_Item_To_Quest" FromRole="Quest_Item" ToRole="Quest" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User_Role" Relationship="Self.FK_User_Role_To_Role" FromRole="Role" ToRole="User_Role" />
+        </EntityType>
+        <EntityType Name="ShopQuest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Id_Provider" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Provider" Relationship="Self.FK_ShopQuest_To_Provider" FromRole="ShopQuest" ToRole="Provider" />
+          <NavigationProperty Name="ShopQuest_item" Relationship="Self.FK_ShopQuest_item_To_ShopQuest" FromRole="ShopQuest" ToRole="ShopQuest_item" />
+        </EntityType>
+        <EntityType Name="ShopQuest_item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Item" Type="Int32" Nullable="false" />
+          <Property Name="Id_ShopQuest" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_ShopQuest_item_To_Item" FromRole="ShopQuest_item" ToRole="Item" />
+          <NavigationProperty Name="ShopQuest" Relationship="Self.FK_ShopQuest_item_To_ShopQuest" FromRole="ShopQuest_item" ToRole="ShopQuest" />
+        </EntityType>
+        <EntityType Name="Supply">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_Provider" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Provider" Relationship="Self.FK_Supply_To_Provider" FromRole="Supply" ToRole="Provider" />
+          <NavigationProperty Name="Supply_Item" Relationship="Self.FK_Supply_Item_To_Supply" FromRole="Supply" ToRole="Supply_Item" />
+        </EntityType>
+        <EntityType Name="Supply_Item">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_supply" Type="Int32" Nullable="false" />
+          <Property Name="Id_Item" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Supply_Item_To_Item" FromRole="Supply_Item" ToRole="Item" />
+          <NavigationProperty Name="Supply" Relationship="Self.FK_Supply_Item_To_Supply" FromRole="Supply_Item" ToRole="Supply" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User_Role" Relationship="Self.FK_User_Role_To_User" FromRole="User" ToRole="User_Role" />
+        </EntityType>
+        <EntityType Name="User_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_User" Type="Int32" Nullable="false" />
+          <Property Name="Id_Role" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role_To_Role" FromRole="User_Role" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role_To_User" FromRole="User_Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="WriteOff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_Item" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_WriteOff_To_Item" FromRole="WriteOff" ToRole="Item" />
+        </EntityType>
+        <Association Name="FK_Item_Type_To_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Item_Type" Type="Self.Item_Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item_Type">
+              <PropertyRef Name="Id_Item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provider_Item_To_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Provider_Item" Type="Self.Provider_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Provider_Item">
+              <PropertyRef Name="Id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quest_Item_To_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Quest_Item" Type="Self.Quest_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quest_Item">
+              <PropertyRef Name="Id_item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopQuest_item_To_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="ShopQuest_item" Type="Self.ShopQuest_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShopQuest_item">
+              <PropertyRef Name="Id_Item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_Item_To_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="Supply_Item" Type="Self.Supply_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supply_Item">
+              <PropertyRef Name="Id_Item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WriteOff_To_Item">
+          <End Role="Item" Type="Self.Item" Multiplicity="1" />
+          <End Role="WriteOff" Type="Self.WriteOff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WriteOff">
+              <PropertyRef Name="Id_Item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Item_Type_To_ItemType">
+          <End Role="ItemType" Type="Self.ItemType" Multiplicity="1" />
+          <End Role="Item_Type" Type="Self.Item_Type" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item_Type">
+              <PropertyRef Name="Id_ItemType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Provider_Item_To_Provider">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+          <End Role="Provider_Item" Type="Self.Provider_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Provider_Item">
+              <PropertyRef Name="Id_provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopQuest_To_Provider">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+          <End Role="ShopQuest" Type="Self.ShopQuest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShopQuest">
+              <PropertyRef Name="Id_Provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_To_Provider">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+          <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supply">
+              <PropertyRef Name="Id_Provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quest_Item_To_Quest">
+          <End Role="Quest" Type="Self.Quest" Multiplicity="1" />
+          <End Role="Quest_Item" Type="Self.Quest_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Quest_Item">
+              <PropertyRef Name="Id_quest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_To_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User_Role" Type="Self.User_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Role">
+              <PropertyRef Name="Id_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopQuest_item_To_ShopQuest">
+          <End Role="ShopQuest" Type="Self.ShopQuest" Multiplicity="1" />
+          <End Role="ShopQuest_item" Type="Self.ShopQuest_item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopQuest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShopQuest_item">
+              <PropertyRef Name="Id_ShopQuest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_Item_To_Supply">
+          <End Role="Supply" Type="Self.Supply" Multiplicity="1" />
+          <End Role="Supply_Item" Type="Self.Supply_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supply">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supply_Item">
+              <PropertyRef Name="Id_supply" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Role" Type="Self.User_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Role">
+              <PropertyRef Name="Id_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Item" EntityType="Self.Item" />
+          <EntitySet Name="Item_Type" EntityType="Self.Item_Type" />
+          <EntitySet Name="ItemType" EntityType="Self.ItemType" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" />
+          <EntitySet Name="Provider_Item" EntityType="Self.Provider_Item" />
+          <EntitySet Name="Quest" EntityType="Self.Quest" />
+          <EntitySet Name="Quest_Item" EntityType="Self.Quest_Item" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="ShopQuest" EntityType="Self.ShopQuest" />
+          <EntitySet Name="ShopQuest_item" EntityType="Self.ShopQuest_item" />
+          <EntitySet Name="Supply" EntityType="Self.Supply" />
+          <EntitySet Name="Supply_Item" EntityType="Self.Supply_Item" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="User_Role" EntityType="Self.User_Role" />
+          <EntitySet Name="WriteOff" EntityType="Self.WriteOff" />
+          <AssociationSet Name="FK_Item_Type_To_Item" Association="Self.FK_Item_Type_To_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Item_Type" EntitySet="Item_Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provider_Item_To_Item" Association="Self.FK_Provider_Item_To_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Provider_Item" EntitySet="Provider_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quest_Item_To_Item" Association="Self.FK_Quest_Item_To_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Quest_Item" EntitySet="Quest_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopQuest_item_To_Item" Association="Self.FK_ShopQuest_item_To_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="ShopQuest_item" EntitySet="ShopQuest_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_Item_To_Item" Association="Self.FK_Supply_Item_To_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="Supply_Item" EntitySet="Supply_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WriteOff_To_Item" Association="Self.FK_WriteOff_To_Item">
+            <End Role="Item" EntitySet="Item" />
+            <End Role="WriteOff" EntitySet="WriteOff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Item_Type_To_ItemType" Association="Self.FK_Item_Type_To_ItemType">
+            <End Role="ItemType" EntitySet="ItemType" />
+            <End Role="Item_Type" EntitySet="Item_Type" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provider_Item_To_Provider" Association="Self.FK_Provider_Item_To_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Provider_Item" EntitySet="Provider_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopQuest_To_Provider" Association="Self.FK_ShopQuest_To_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="ShopQuest" EntitySet="ShopQuest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_To_Provider" Association="Self.FK_Supply_To_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Supply" EntitySet="Supply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quest_Item_To_Quest" Association="Self.FK_Quest_Item_To_Quest">
+            <End Role="Quest" EntitySet="Quest" />
+            <End Role="Quest_Item" EntitySet="Quest_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_To_Role" Association="Self.FK_User_Role_To_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User_Role" EntitySet="User_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopQuest_item_To_ShopQuest" Association="Self.FK_ShopQuest_item_To_ShopQuest">
+            <End Role="ShopQuest" EntitySet="ShopQuest" />
+            <End Role="ShopQuest_item" EntitySet="ShopQuest_item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_Item_To_Supply" Association="Self.FK_Supply_Item_To_Supply">
+            <End Role="Supply" EntitySet="Supply" />
+            <End Role="Supply_Item" EntitySet="Supply_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_To_User" Association="Self.FK_User_Role_To_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Role" EntitySet="User_Role" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ShopDBModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Item">
+            <EntityTypeMapping TypeName="ShopDBModel.Item">
+              <MappingFragment StoreEntitySet="Item">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="info" ColumnName="info" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="count" ColumnName="count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item_Type">
+            <EntityTypeMapping TypeName="ShopDBModel.Item_Type">
+              <MappingFragment StoreEntitySet="Item_Type">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
+                <ScalarProperty Name="Id_ItemType" ColumnName="Id_ItemType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemType">
+            <EntityTypeMapping TypeName="ShopDBModel.ItemType">
+              <MappingFragment StoreEntitySet="ItemType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provider">
+            <EntityTypeMapping TypeName="ShopDBModel.Provider">
+              <MappingFragment StoreEntitySet="Provider">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provider_Item">
+            <EntityTypeMapping TypeName="ShopDBModel.Provider_Item">
+              <MappingFragment StoreEntitySet="Provider_Item">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_item" ColumnName="Id_item" />
+                <ScalarProperty Name="Id_provider" ColumnName="Id_provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quest">
+            <EntityTypeMapping TypeName="ShopDBModel.Quest">
+              <MappingFragment StoreEntitySet="Quest">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="key" ColumnName="key" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="LastEdit" ColumnName="LastEdit" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quest_Item">
+            <EntityTypeMapping TypeName="ShopDBModel.Quest_Item">
+              <MappingFragment StoreEntitySet="Quest_Item">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_quest" ColumnName="Id_quest" />
+                <ScalarProperty Name="Id_item" ColumnName="Id_item" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="countIn" ColumnName="countIn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="ShopDBModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Role1" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShopQuest">
+            <EntityTypeMapping TypeName="ShopDBModel.ShopQuest">
+              <MappingFragment StoreEntitySet="ShopQuest">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id_Provider" ColumnName="Id_Provider" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShopQuest_item">
+            <EntityTypeMapping TypeName="ShopDBModel.ShopQuest_item">
+              <MappingFragment StoreEntitySet="ShopQuest_item">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
+                <ScalarProperty Name="Id_ShopQuest" ColumnName="Id_ShopQuest" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supply">
+            <EntityTypeMapping TypeName="ShopDBModel.Supply">
+              <MappingFragment StoreEntitySet="Supply">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id_Provider" ColumnName="Id_Provider" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supply_Item">
+            <EntityTypeMapping TypeName="ShopDBModel.Supply_Item">
+              <MappingFragment StoreEntitySet="Supply_Item">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_supply" ColumnName="Id_supply" />
+                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="ShopDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Role">
+            <EntityTypeMapping TypeName="ShopDBModel.User_Role">
+              <MappingFragment StoreEntitySet="User_Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_User" ColumnName="Id_User" />
+                <ScalarProperty Name="Id_Role" ColumnName="Id_Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WriteOff">
+            <EntityTypeMapping TypeName="ShopDBModel.WriteOff">
+              <MappingFragment StoreEntitySet="WriteOff">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id_Item" ColumnName="Id_Item" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

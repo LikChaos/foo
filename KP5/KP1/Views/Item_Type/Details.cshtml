@@ -1,0 +1,34 @@
+﻿@model KP1.Models.Item_Type
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Item_Type</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Item.info)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item.info)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemType.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

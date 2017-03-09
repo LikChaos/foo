@@ -1,0 +1,58 @@
+﻿@using KP1.Models
+@using KP1.Controllers
+@model IEnumerable<KP1.Models.Quest_Item>
+@{
+    ViewBag.Title = "Quest";
+}
+
+<h2>Заказ</h2>
+
+@Html.ActionLink("Создать новый заказ", "CreateQuest", "UserAction")
+<br />
+@Html.ActionLink("Редактировать", "EditQuest", "UserAction")
+<br />
+@if (Session["QuestID"] != null)
+{
+    @Html.Label("Номер заказа: " + Session["QuestID"].ToString())
+    <br />
+    @Html.Label("Состояние")
+    @Html.Label(((int)(ViewBag.Quest.State)).ToString())
+    <br />
+
+    if (((int)Session["QuestID"]) == 0)
+    {
+        @Html.Label("Ваш заказ не готов.")
+    }else
+	{
+		@Html.Label("Ваш заказ готов.")
+    }
+
+    @Html.Label(Utils.QuestPrise((int)Session["QuestID"]).ToString())
+    <br />
+    <br />
+    @Html.Label("Ну а теперь, когда заказ готов, вы спакойно можете ходить по сайту и добавлять сюда все-возможные товары, кнопочкой добавить")
+    <br />
+    @Html.Label("На этой странице вы можете просмотреть товары в вашем заказе.")
+
+    if (Model != null && (Model.Count() != 0))
+    {
+        <table border="1" class="table">
+            <tr>
+                <td>@Html.Label("Штрих код") </td>
+                <td>@Html.Label("Информация") </td>
+                <td>@Html.Label("Стоимость") </td>
+                <td>@Html.Label("Количество") </td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.Label(item.Item.barcode.ToString() ) </td>
+                    <td>@Html.Label(item.Item.info.ToString()) </td>
+                    <td>@Html.Label(item.Item.price.ToString()) </td>
+                    <td>@Html.Label(item.count.ToString()) </td>
+                    <td>@Html.ActionLink("Удалить", "Delete", new { id_Quest_Item = item.Id })</td>
+                </tr>
+            }
+        </table>
+    }
+}

@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Главная страница работников</h2>
+
+@if (User.IsInRole("vendor"))
+{
+    <table>
+        <tr>
+            <td>@Html.ActionLink("Просмотр заказа", "Index", "Quests")   </td>
+        </tr>
+    </table>
+    <br />
+}
+@if (User.IsInRole("admin"))
+{
+    <table>
+        <tr>
+            <td>@Html.ActionLink("Управление пользователями", "Index", "Users")   </td>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Управление ролями", "Index", "Roles")   </td>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Добавление ролей", "Index", "User_Role")   </td>
+        </tr>
+    </table>
+    <br />
+}
+@if (User.IsInRole("manager"))
+{
+    <table>
+        <tr>
+            <td>@Html.ActionLink("Типом товаров", "Index", "ItemTypes")   </td>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Товары", "Index", "Items")   </td>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Товар-тип", "Index", "Item_Type")   </td>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Поставщики", "Index", "Providers")   </td>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Товары поставщика", "Index", "Provider_item")   </td>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Продажи", "Sales", "Quests")   </td>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Списание", "Index", "WriteOffs")   </td>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Заказы магазина", "Index", "ShopQuests")   </td>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Состовляющее этих заказов", "Index", "ShopQuest_item")   </td>
+        </tr>
+    </table>
+    <br />
+}
+@if (User.IsInRole("storekeeper"))
+{
+    <table>
+        <tr>
+            <td>@Html.ActionLink("Поставки", "Index", "Supplies")   </td>
+        </tr>
+    </table>
+    <br />
+}

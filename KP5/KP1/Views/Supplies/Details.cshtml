@@ -1,0 +1,91 @@
+﻿@model KP1.Models.Supply
+@using KP1.Models
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Supply</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Номер поставки")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.Label("Поставщик")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Provider.Name)
+        </dd>
+
+    </dl>
+</div>
+@if (Model.State == 0)
+{
+    using (Html.BeginForm("AddItemInSupply", "Supplies", new { id_supply = (int)(ViewBag.id_supply) }))// и как
+    {
+        @Html.Label("Штрихкод: ")
+        @Html.DropDownList("Barcode_Item", null, htmlAttributes: new { @class = "form-control" })
+        @Html.Label("Количество: ")
+        @Html.Editor("count")
+        <input type="submit" value="Create" />
+    }
+}
+<table class="table" border="1">
+    <tr>
+        <th>
+            @Html.Label("Количество")
+        </th>
+        <th>
+            @Html.Label("Штрихкод")
+        </th>
+    </tr>
+
+    @foreach (var item in (List<Supply_Item>)(ViewBag.Suppliy_item))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item.barcode)
+            </td>
+            <td>
+                @if (Model.State == 0)
+                {
+                    @Html.ActionLink("Удалить", "DeleteItem", new { id = item.Id, id_supply = Model.Id })
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

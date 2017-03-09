@@ -1,0 +1,16 @@
+﻿@model IEnumerable<KP1.Models.ItemType>
+@{
+    ViewBag.Title = "TypeScroll";
+}
+@if (Model != null)//ну мало-ли. впринцапе вазможно.
+{
+    foreach (var item in Model)
+    {
+        <p>
+            @Html.ActionLink(item.Name, "ShowItems", new { id = item.Id })
+        </p>
+    }
+}
+
+
+

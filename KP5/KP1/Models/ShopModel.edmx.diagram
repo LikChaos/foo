@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="55a41ebf7a31429e9ff353b04a468b59" Name="Diagram1" ZoomLevel="63">
+        <EntityTypeShape EntityType="ShopDBModel.Item" Width="1.5" PointX="2.875" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopDBModel.Item_Type" Width="1.5" PointX="1" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopDBModel.ItemType" Width="1.5" PointX="1" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopDBModel.Provider" Width="1.5" PointX="7.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopDBModel.Provider_Item" Width="1.5" PointX="5.875" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopDBModel.Quest" Width="1.5" PointX="0.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopDBModel.Quest_Item" Width="1.5" PointX="2.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopDBModel.Role" Width="1.5" PointX="11.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopDBModel.ShopQuest" Width="1.5" PointX="7.625" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopDBModel.ShopQuest_item" Width="1.5" PointX="5.375" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopDBModel.Supply" Width="1.5" PointX="9.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopDBModel.Supply_Item" Width="1.5" PointX="9.625" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopDBModel.User" Width="1.5" PointX="11.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopDBModel.User_Role" Width="1.5" PointX="11.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopDBModel.WriteOff" Width="1.5" PointX="2.75" PointY="9.5" IsExpanded="true" />
+        <AssociationConnector Association="ShopDBModel.FK_Item_Type_To_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopDBModel.FK_Provider_Item_To_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopDBModel.FK_Quest_Item_To_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopDBModel.FK_ShopQuest_item_To_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopDBModel.FK_Supply_Item_To_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopDBModel.FK_WriteOff_To_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopDBModel.FK_Item_Type_To_ItemType" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopDBModel.FK_Provider_Item_To_Provider" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopDBModel.FK_ShopQuest_To_Provider" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopDBModel.FK_Supply_To_Provider" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopDBModel.FK_Quest_Item_To_Quest" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopDBModel.FK_User_Role_To_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopDBModel.FK_ShopQuest_item_To_ShopQuest" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopDBModel.FK_Supply_Item_To_Supply" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopDBModel.FK_User_Role_To_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

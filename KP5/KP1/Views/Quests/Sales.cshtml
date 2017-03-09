@@ -1,0 +1,78 @@
+﻿@model IEnumerable<KP1.Models.Quest>
+@using KP1.Controllers
+@{
+    ViewBag.Title = "Sales";
+}
+
+<h2>Sales</h2>
+
+@using (Html.BeginForm("Sales", "Quests"))
+{
+    @Html.Label("С какого числа")
+    <input type="date" name="fromDate" />
+    <br />
+    @Html.Label("По какое число")
+    <input type="date" name="toDate" />
+
+    <br />
+    <input type="submit" value="Обновить">
+}
+<br />
+@using (Html.BeginForm("Sales", "Quests",new { fromDate=DateTime.Now.Date, toDate = DateTime.Now.Date.AddDays(1) }))
+{
+    <input type="submit" value="За сегодня">
+}
+<br />
+
+@Html.Label("За периуд заработано: ")
+@Html.Label(((decimal)(ViewBag.TotalPrice)).ToString());
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.key)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastEdit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.Label("Цена")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.key)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastEdit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.Label(Utils.QuestPrise(item.Id).ToString())
+            </td>
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,117 @@
+﻿@model KP1.Models.Quest
+@using KP1.Models
+@using KP1.Controllers
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Просмотр.</h2>
+
+<div>
+    <h4>Quest</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.key)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.key)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastEdit)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastEdit)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.Label("Цена")
+        </dt>
+        <dd>
+            @Html.Label(Utils.QuestPrise(Model.Id).ToString())
+        </dd>
+    </dl>
+</div>
+<table class="table" border="1">
+    <tr>
+        <td>
+            Штрих код.
+        </td>
+        <td>
+            Описание.
+        </td>
+        <td>
+            Цена.
+        </td>
+        <td>
+            Количество.
+        </td>
+        <td>
+            На складе.
+        </td>
+    </tr>
+@foreach (var item in (List<Quest_Item>)ViewBag.Items)
+{
+    <tr align="center">
+        <td>
+            @Html.Label(item.Item.barcode.ToString())
+        </td>
+        <td>
+            @Html.Label(item.Item.info.ToString())
+        </td>
+        <td>
+            @Html.Label(item.Item.price.ToString())
+        </td>
+        <td>
+            @Html.Label(item.count.ToString())
+        </td>
+        <td>
+            @Html.Label(item.countIn.ToString())
+        </td>
+        @if (Model.State < 2)
+        {
+            using (Html.BeginForm("DeleteItemFromQuest", "Quests", new { id_questitem = item.Id }))// ActionLink не работает
+            {
+                <td>
+                    <input type="submit" value="Удалить" />
+                </td>
+            }
+        }
+    </tr>
+}
+</table>
+@if (Model.State < 2)
+{
+    using (Html.BeginForm("AddItemInQuest", "Quests", new { id_quest = (int)(ViewBag.id_quest) }))// и как
+    {
+        @Html.Label("Штрихкод: ")
+        @Html.DropDownList("Barcode_Item", null, htmlAttributes: new { @class = "form-control" })
+        @Html.Label("Количество: ")
+        @Html.Editor("Item_count")
+        <input type="submit" value="Create" />
+    }
+}
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

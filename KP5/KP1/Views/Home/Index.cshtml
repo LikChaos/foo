@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Главная</h2>
+
+<style>
+    table {
+        width: 100%;
+    }
+
+    td {
+        vertical-align: top;
+    }
+</style>
+<table class="table">
+    <tr>
+        <td> @Html.Action("TypeScroll", "Home") </td>
+        <td> @Html.Action("ItemScroll", "Home") </td>
+    </tr>
+</table>

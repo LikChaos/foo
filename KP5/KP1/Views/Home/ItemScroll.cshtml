@@ -1,0 +1,40 @@
+﻿@model IEnumerable<KP1.Models.Item>
+@{
+    ViewBag.Title = "ItemScroll";
+}
+@if (Model != null)
+{
+    <table>
+        <tr>
+            <td>Штрих код.</td>
+            <td>Описание.</td>
+            <td>Количество на складе магазина.</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.Label(item.barcode.ToString())
+                </td>
+                <td>
+                    @Html.Label(item.info)
+                </td>
+                <td>
+                    @Html.Label(KP1.Controllers.Utils.countFree(item.Id).ToString())
+                </td>
+                @if (Session["QuestID"] != null)
+                {
+                    <td>
+                        @using (Html.BeginForm("AddItemInQuest","Home",new { id_item = item.Id }))
+                        {
+                            <input type="submit" value="Create" class="btn btn-default" />
+                            @Html.Label("Количество: ")
+                            @Html.Editor("Item_count")
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+}
+
